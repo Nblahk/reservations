@@ -20,25 +20,51 @@ from django.views.generic.base import TemplateView
 
 
 urlpatterns = [
-    
-    path('accounts/', include('accounts.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('catalogue/', include('catalogue.urls')),
-            path("admin/password_reset/",auth_views.PasswordResetView.as_view(extra_context={"site_header": admin.site.site_header}),
-        name="admin_password_reset",),
-    path("admin/password_reset/done/",auth_views.PasswordResetDoneView.as_view(extra_context={"site_header": admin.site.site_header}),
-        name="password_reset_done",),
-    path("reset/<uidb64>/<token>/",auth_views.PasswordResetConfirmView.as_view(extra_context={"site_header": admin.site.site_header}),
-        name="password_reset_confirm",),
-    path("reset/done/",auth_views.PasswordResetCompleteView.as_view(extra_context={"site_header": admin.site.site_header}),
-        name="password_reset_complete",),
+    # Page d'accueil
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
 
-    path('',TemplateView.as_view(template_name='home.html'),name='home'),
-    path('accounts/signup/', include('accounts.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    # Comptes : inscription, profil, login/logout, password change
+    path('accounts/', include('accounts.urls')),                # signup, profile
+    path('accounts/', include('django.contrib.auth.urls')),     # login, logout, password_change, etc.
+
+    # Catalogue
     path('catalogue/', include('catalogue.urls')),
+
+    # Réinitialisation de mot de passe (admin)
+    path(
+        'admin/password_reset/',
+        auth_views.PasswordResetView.as_view(
+            extra_context={"site_header": admin.site.site_header}
+        ),
+        name="admin_password_reset"
+    ),
+    path(
+        'admin/password_reset/done/',
+        auth_views.PasswordResetDoneView.as_view(
+            extra_context={"site_header": admin.site.site_header}
+        ),
+        name="password_reset_done"
+    ),
+    path(
+        'admin/reset/<uidb64>/<token>/',
+        auth_views.PasswordResetConfirmView.as_view(
+            extra_context={"site_header": admin.site.site_header}
+        ),
+        name="password_reset_confirm"
+    ),
+    path(
+        'admin/reset/done/',
+        auth_views.PasswordResetCompleteView.as_view(
+            extra_context={"site_header": admin.site.site_header}
+        ),
+        name="password_reset_complete"
+    ),
+
+    # Admin
     path('admin/', admin.site.urls),
 ]
-admin.site.index_title = "Projet Réservations"
+
+# Personnalisation de l’interface d’administration
+admin.site.index_title  = "Projet Réservations"
 admin.site.index_header = "Projet Réservations HEADER"
-admin.site.site_title = "Spectacles"
+admin.site.site_title   = "Spectacles"
