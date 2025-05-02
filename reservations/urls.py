@@ -21,9 +21,10 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     
+    path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('catalogue/', include('catalogue.urls')),
-        path("admin/password_reset/",auth_views.PasswordResetView.as_view(extra_context={"site_header": admin.site.site_header}),
+            path("admin/password_reset/",auth_views.PasswordResetView.as_view(extra_context={"site_header": admin.site.site_header}),
         name="admin_password_reset",),
     path("admin/password_reset/done/",auth_views.PasswordResetDoneView.as_view(extra_context={"site_header": admin.site.site_header}),
         name="password_reset_done",),
@@ -31,6 +32,7 @@ urlpatterns = [
         name="password_reset_confirm",),
     path("reset/done/",auth_views.PasswordResetCompleteView.as_view(extra_context={"site_header": admin.site.site_header}),
         name="password_reset_complete",),
+
     path('',TemplateView.as_view(template_name='home.html'),name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('catalogue/', include('catalogue.urls')),
