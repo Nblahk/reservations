@@ -34,6 +34,7 @@ urlpatterns = [
         name="password_reset_complete",),
 
     path('',TemplateView.as_view(template_name='home.html'),name='home'),
+    path('accounts/signup/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('catalogue/', include('catalogue.urls')),
     path('admin/', admin.site.urls),
