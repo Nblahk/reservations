@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import delete
+
 
 app_name = 'catalogue'
 
@@ -9,4 +11,5 @@ urlpatterns = [
     path('artist/<int:artist_id>/',       views.artist.show,    name='artist_show'),
     path('artist/<int:artist_id>/edit/',  views.artist.edit,    name='artist_edit'),
     path('artist/<int:artist_id>/delete/',views.artist.delete,  name='artist_delete'),
+    path('profile/delete/<int:pk>/', delete, name='user-delete'),
 ]

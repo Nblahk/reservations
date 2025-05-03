@@ -9,13 +9,10 @@ from .forms.UserSignUpForm import UserSignUpForm
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm
 from django.contrib.auth.models import User
-
+from django.contrib.auth import login, logout
 
 from .forms.UserSignUpForm import UserSignUpForm
 from .forms.UserUpdateForm import UserUpdateForm
-
-
-
 
 
 class UserUpdateView(UserPassesTestMixin, UpdateView):
@@ -76,3 +73,25 @@ def profile(request):
     return render(request, 'users/profile.html', {
         'user_language': languages.get(lang_code, "—"),
     })
+@login_required
+def delete(request, pk):
+    """
+    Supprime l’utilisateur connecté via POST, puis le déconnecte et redirige vers home.
+    """
+    if request.method == "POST":
+        # On s’assure que l’utilisateur ne peut supprimer que son propre compte
+        if request.user.id != pk and not request.user.is_superuser:
+            messages.error(request, "Vous n’êtes pas autorisé·e à supprimer ce compte.")
+            return redirect('accounts:user-profile')
+
+        # Récupération et suppression
+        user = User.objects.get(pk=pk)
+        user.delete()
+
+        # On déconnecte
+        logout(request)
+        messages.success(request, "Votre compte a bien été supprimé.")
+        return redirect('home')
+
+    # Si quelqu’un atteint cette vue en GET, on redirige vers le profil
+    return redirect('accounts:user-profile')
