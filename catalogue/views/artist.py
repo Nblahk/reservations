@@ -1,7 +1,8 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from django.http import Http404
 from django.contrib import messages
-from django.conf import settings
+from django.conf import settings 
+from django.contrib.auth.decorators import login_required , permission_required , user_passes_test 
 
 from catalogue.forms.ArtistForm import ArtistForm 
 
@@ -29,6 +30,13 @@ def show(request, artist_id):
 		'artist':artist,
 		'title':title 
 	})
+
+def admin_check(user):
+    return user.username.__eq__('Nabil') and user.email.__eq__("ahakeu.nabil@hotmail.fr")
+
+@user_passes_test(admin_check)
+@login_required(login_url=settings.LOGIN_URL)
+@permission_required('catalogue.add_artist', raise_exception=True)
 def create(request):
 	if not request.user.is_authenticated or not request.user.has_perm('add_artist'):
 		return redirect(f"{settings.LOGIN_URL}?next={request.path}")
@@ -48,6 +56,8 @@ def create(request):
 		'form': form,
 	})
 
+@login_required(login_url=settings.LOGIN_URL)
+@permission_required('catalogue.add_artist', raise_exception=True)
 def delete(request, artist_id): 
     artist = get_object_or_404(Artist, id = artist_id)
 
@@ -63,6 +73,8 @@ def delete(request, artist_id):
         'artist' : artist,
     })
 
+@login_required(login_url=settings.LOGIN_URL)
+@permission_required('catalogue.add_artist', raise_exception=True)
 def edit(request, artist_id):
 	# fetch the object related to passed id
 	artist = Artist.objects.get(id=artist_id)
