@@ -22,9 +22,17 @@
                     <p><a href="{% url 'login' %}">Se connecter</a></p>
                     <p><a href="{% url 'accounts:user-signup' %}">S'inscrire</a></p>
                     {% endif %}
-                </div>
+                </div>        
+                    <nav>
+                        <ul>
+                        <li><a href="{% url 'home' %}">Accueil</a></li>
+                        <li><a href="{% url 'catalogue:artist_index' %}">Nos artistes</a></li>
+                        <!-- Lien Administration, toujours visible -->
+                        <li><a href="{% url 'admin:index' %}">Administration</a></li>
+                        </ul>
+                    </nav>
+                  
             </header>
-
             <main>        
         <div id="notification">
                 {% if messages %}

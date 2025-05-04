@@ -48,7 +48,7 @@ def create(request):
 			form.save()
 			messages.add_message(request, messages.SUCCESS, "Nouvel artiste créé avec succès.")
 
-			return redirect('catalogue:artist-index')
+			return redirect('catalogue:artist_index')
 		else:
 			messages.add_message(request, messages.ERROR, "Échec de l'ajout d'un nouvel artiste !")
 
@@ -65,7 +65,7 @@ def delete(request, artist_id):
         artist.delete()
         messages.success(request, "Artiste supprimé avec succès.")
 
-        return redirect('catalogue:artist-index')
+        return redirect('catalogue:artist_index')
     else:
         messages.error(request, "Échec de la suppression de l'artiste !")
 
