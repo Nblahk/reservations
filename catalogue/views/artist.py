@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from django.http import Http404
 from django.contrib import messages
+from django.conf import settings
 
 from catalogue.forms.ArtistForm import ArtistForm 
 
@@ -29,20 +30,23 @@ def show(request, artist_id):
 		'title':title 
 	})
 def create(request):
-    form = ArtistForm(request.POST or None)
-    
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.SUCCESS, "Nouvel artiste créé avec succès.")
+	if not request.user.is_authenticated or not request.user.has_perm('add_artist'):
+		return redirect(f"{settings.LOGIN_URL}?next={request.path}")
 
-            return redirect('catalogue:artist-index')
-        else:
-            messages.add_message(request, messages.ERROR, "Échec de l'ajout d'un nouvel artiste !")
+	form = ArtistForm(request.POST or None)
 
-    return render(request, 'artist/create.html', {
-        'form' : form,
-    })
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save()
+			messages.add_message(request, messages.SUCCESS, "Nouvel artiste créé avec succès.")
+
+			return redirect('catalogue:artist-index')
+		else:
+			messages.add_message(request, messages.ERROR, "Échec de l'ajout d'un nouvel artiste !")
+
+	return render(request, 'artist/create.html', {
+		'form': form,
+	})
 
 def delete(request, artist_id): 
     artist = get_object_or_404(Artist, id = artist_id)
