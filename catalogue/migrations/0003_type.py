@@ -1,19 +1,17 @@
 from django.db import migrations, models
 
 class Migration(migrations.Migration):
-    initial = True
-
     dependencies = [
+        ('catalogue', '0002_usermeta'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Artist',
+            name='Type',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('firstname', models.CharField(max_length=60)),
-                ('lastname', models.CharField(max_length=60)),
+                ('type', models.CharField(max_length=60)),
             ],
-            options={'db_table': 'artists'},
+            options={'db_table': 'types'},
         ),
     ]
