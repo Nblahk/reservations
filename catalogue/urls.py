@@ -12,4 +12,6 @@ urlpatterns = [
     path('artist/<int:artist_id>/edit/',  views.artist.edit,    name='artist_edit'),
     path('artist/<int:artist_id>/delete/',views.artist.delete,  name='artist_delete'),
     path('profile/delete/<int:pk>/', delete, name='user-delete'),
+    path('type/', views.type.index, name='type-index'),
+    path('type/<int:type_id>', views.type.show, name='type-show'),
 ]
