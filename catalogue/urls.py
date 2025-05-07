@@ -14,4 +14,8 @@ urlpatterns = [
     path('profile/delete/<int:pk>/', delete, name='user-delete'),
     path('type/', views.type.index, name='type-index'),
     path('type/<int:type_id>', views.type.show, name='type-show'),
+    path('locality/',                       views.locality.index, name='locality_index'),
+    path('locality/<int:locality_id>/',     views.locality.show,  name='locality_show'),
+    path('price/',            views.price.index, name='price_index'),
+    path('price/<int:price_id>/', views.price.show, name='price_show'),
 ]

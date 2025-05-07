@@ -61,7 +61,6 @@ urlpatterns = [
         name="password_reset_complete"
     ),
 
-    # Admin
     path('admin/', admin.site.urls),
 
 ]
