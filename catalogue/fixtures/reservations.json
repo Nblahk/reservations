@@ -1,0 +1,224 @@
+[
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 1,
+
+  "fields": {
+
+    "booking_date": "2025-05-07T22:02:30.692Z",
+
+    "status": "en attente",
+
+    "user": [
+
+      "Bob"
+
+    ]
+
+  }
+
+},
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 2,
+
+  "fields": {
+
+    "booking_date": "2025-05-07T22:02:30.709Z",
+
+    "status": "annulée",
+
+    "user": [
+
+      "Bob"
+
+    ]
+
+  }
+
+},
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 3,
+
+  "fields": {
+
+    "booking_date": "2025-05-07T22:02:30.736Z",
+
+    "status": "payée",
+
+    "user": [
+
+      "Bob"
+
+    ]
+
+  }
+
+},
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 4,
+
+  "fields": {
+
+    "booking_date": "2025-05-07T22:02:30.746Z",
+
+    "status": "payée",
+
+    "user": [
+
+      "Anna"
+
+    ]
+
+  }
+
+},
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 5,
+
+  "fields": {
+
+    "booking_date": "2025-05-19T13:00:41.154Z",
+
+    "status": "en attente",
+
+    "user": [
+
+      "Bob"
+
+    ]
+
+  }
+
+},
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 6,
+
+  "fields": {
+
+    "booking_date": "2025-05-19T13:00:52.348Z",
+
+    "status": "annulée",
+
+    "user": [
+
+      "Bob"
+
+    ]
+
+  }
+
+},
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 7,
+
+  "fields": {
+
+    "booking_date": "2025-05-19T13:01:00.763Z",
+
+    "status": "payée",
+
+    "user": [
+
+      "Bob"
+
+    ]
+
+  }
+
+},
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 8,
+
+  "fields": {
+
+    "booking_date": "2025-05-19T13:01:14.160Z",
+
+    "status": "payée",
+
+    "user": [
+
+      "Anna"
+
+    ]
+
+  }
+
+},
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 9,
+
+  "fields": {
+
+    "booking_date": "2025-05-19T21:36:54.412Z",
+
+    "status": "payée",
+
+    "user": [
+
+      "Bob"
+
+    ]
+
+  }
+
+},
+
+{
+
+  "model": "catalogue.reservation",
+
+  "pk": 10,
+
+  "fields": {
+
+    "booking_date": "2025-05-19T21:37:09.742Z",
+
+    "status": "en attente",
+
+    "user": [
+
+      "Anna"
+
+    ]
+
+  }
+
+}
+
+]
+
