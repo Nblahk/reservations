@@ -4,5 +4,15 @@
 
 {% block content %}
   <h1>{{ locality.postal_code }} {{ locality.locality|title }}</h1>
+      <h2>Lieux de spectacle</h2>
+
+    <ul>
+    {% for location in locality.locations.all %}
+        <li><a href="#">{{ location.designation }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <p><code>{{ locality.locations.all }}</code></p>
+
   <nav><a href="{% url 'catalogue:locality_index' %}">Retour à la liste</a></nav>
 {% endblock %}
