@@ -8,7 +8,7 @@ class Reservation(models.Model):
         null=False, related_name='reservations')
     
     def __str__(self):
-        return f"{self.user} - {self.booking_date}"
+        return f"{self.user} - {self.booking_date} – {self.status}"
 
     class Meta:
         db_table = "reservations"
