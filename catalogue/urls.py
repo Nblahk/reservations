@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from .views import delete
-
+from catalogue.views.show import index as show_index, show as show_detail
 
 app_name = 'catalogue'
 
@@ -20,5 +20,7 @@ urlpatterns = [
     path('price/<int:price_id>/', views.price.show, name='price_show'),
     path('location/', views.location.index, name='location-index'),
     path('location/<int:location_id>', views.location.show, name='location-show'),
+    path('show/',            show_index,    name='show-index'),
+    path('show/<int:show_id>/', show_detail, name='show-show'),
 
 ]
