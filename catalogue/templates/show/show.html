@@ -1,31 +1,57 @@
 {% extends 'layouts/base.html' %}
 
-{% load static %}
-
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Fiche d’un artiste{% endblock %}
 
 {% block content %}
-    <h1>{{ show.title }}</h1>
+  <h2>{{ artist.firstname }} {{ artist.lastname }}</h2>
 
-    {% if show.poster_url %}
-    <p><img src="{% static 'catalogue/images/' %}{{ show.poster_url }}" alt="{{ show.title }}" width="200"></p>
+  <section>
+    <h3>Affiliation</h3>
+    {% if artist.troupe %}
+      <p>
+        <strong>Groupe :</strong> {{ artist.troupe.name }}<br>
+        <img src="{{ artist.troupe.logo_url }}"
+             alt="Logo de {{ artist.troupe.name }}"
+             width="50">
+      </p>
     {% else %}
-    <canvas width="200" height="100" style="border:1px solid #000000;"></canvas>
+      <p><em>Non affilié</em></p>
     {% endif %}
-    
-    {% if show.location %}
-    <p><strong>Lieu de création:</strong> {{ show.location.designation }}</p>
-    {% endif %}
-        
-    <p><strong>Durée :</strong> {{ show.duration }} minutes</p>
-    <p><strong>Année de création :</strong> {{ show.created_in }}</p>
-        
-    {% if show.bookable %}
-    <p><em>Réservable</em></p>
-    {% else %}
-    <p><em>Non réservable</em></p>
-    {% endif %}
+  </section>
 
-    <nav><a href="{% url 'catalogue:show-index' %}">Retour à l'index</a></nav>
+  {% if request.user.is_superuser %}
+    <section>
+      <h3>Modifier l’affiliation</h3>
+      <form method="post" action="">
+        {% csrf_token %}
+        <label for="id_troupe">Choisir une troupe :</label>
+        <select name="troupe" id="id_troupe">
+          <option value="" {% if not artist.troupe %}selected{% endif %}>Non affilié</option>
+          {% for t in troupes %}
+            <option value="{{ t.pk }}"
+              {% if artist.troupe and t.pk == artist.troupe.pk %}selected{% endif %}>
+              {{ t.name }}
+            </option>
+          {% endfor %}
+        </select>
+        <button type="submit">Enregistrer</button>
+      </form>
+    </section>
+  {% endif %}
+
+  <div>
+    <a href="{% url 'catalogue:artist_edit' artist.id %}">Modifier</a>
+  </div>
+  <form
+    method="post"
+    action="{% url 'catalogue:artist_delete' artist.id %}"
+    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ?')"
+  >
+    {% csrf_token %}
+    <button type="submit">Supprimer</button>
+  </form>
+
+  <nav>
+    <a href="{% url 'catalogue:artist_index' %}">Retour à l'index</a>
+  </nav>
 {% endblock %}
-

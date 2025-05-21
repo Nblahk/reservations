@@ -1,0 +1,18 @@
+[
+  {
+    "model": "catalogue.troupe",
+    "pk": 1,
+    "fields": {
+      "name": "Compagnie Alpha",
+      "logo_url": "https://example.com/logos/alpha.png"
+    }
+  },
+  {
+    "model": "catalogue.troupe",
+    "pk": 2,
+    "fields": {
+      "name": "Théâtre Beta",
+      "logo_url": "https://example.com/logos/beta.png"
+    }
+  }
+]

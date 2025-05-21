@@ -5,18 +5,17 @@ from .location import Location
 
 class Show(models.Model):
     slug         = models.CharField(max_length=60, unique=True)
-    title        = models.CharField(max_length=255)
-    description  = models.TextField(max_length=255, null=True, blank=True)
-    poster_url   = models.CharField(max_length=255, null=True, blank=True)
+    title        = models.CharField(max_length=191)
+    description  = models.TextField(max_length=191, null=True, blank=True)
+    poster_url   = models.CharField(max_length=191, null=True, blank=True)
     duration     = models.PositiveSmallIntegerField(null=True, blank=True)
     # on le déclare sans auto_now_add
-    created_in   = models.PositiveSmallIntegerField()
-    location     = models.ForeignKey(
-                      Location,
-                      on_delete=models.SET_NULL,
-                      null=True,
-                      related_name='shows'
-                   )
+    created_in = models.DateField(auto_now_add=True)
+    location   = models.ForeignKey(
+        Location,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='shows')
     bookable     = models.BooleanField(default=True)
     created_at   = models.DateTimeField(auto_now_add=True)
     updated_at   = models.DateTimeField(auto_now=True)
